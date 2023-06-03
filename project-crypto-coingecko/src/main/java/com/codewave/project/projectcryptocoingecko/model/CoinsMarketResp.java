@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)//spring boot 特性：convention Over Configuration
-public class CoinsMarketDto {
+public class CoinsMarketResp {
 
   private String id;
   private String symbol;
