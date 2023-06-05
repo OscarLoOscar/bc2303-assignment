@@ -1,4 +1,4 @@
-package com.codewave.project.projectcryptocoingecko.config;
+package com.codewave.projectcryptopolygon.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.codewave.project.projectcryptocoingecko.config;
+package com.codewave.projectcryptopolygon.config;
 
 import java.io.IOException;
 import jakarta.servlet.Filter;

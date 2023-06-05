@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codewave.project.projectcryptocoingecko.controller.CoingeckoOperations;
+import com.codewave.project.projectcryptocoingecko.infra.exception.BusinessException;
+import com.codewave.project.projectcryptocoingecko.infra.response.CoinsApi;
+import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinMarketRespDto;
 import com.codewave.project.projectcryptocoingecko.service.CoinsService;
 
@@ -31,14 +34,14 @@ public class CoingeckoController implements CoingeckoOperations {
         .collect(Collectors.toList());
   }
 
-  // @Override
-  // public ChannelDto getExchangeRate(List<String> cryptos,
-  // List<String> currencies) throws BusinessException {
-  // return ChannelDto.builder()
-  // .exchangeRates(CoinsApi.map(coinsService.getAllCoinsMarkets(cryptos,
-  // currencies)))
-  // .build();
-  // }
+  @Override
+  public ChannelDto getExchangeRate(List<String> cryptos,
+      List<String> currencies) throws BusinessException {
+    return ChannelDto.builder()
+        .exchangeRates(CoinsApi.map(coinsService.getSimplePrices(cryptos,
+            currencies)))
+        .build();
+  }
 
   // @Override
   // public List<String> stringToList(List<String> coins) {

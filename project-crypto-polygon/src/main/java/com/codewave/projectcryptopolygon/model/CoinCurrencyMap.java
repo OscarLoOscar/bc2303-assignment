@@ -1,4 +1,4 @@
-package com.codewave.project.projectcryptocoingecko.model;
+package com.codewave.projectcryptopolygon.model;
 
 import java.util.HashMap;
 
