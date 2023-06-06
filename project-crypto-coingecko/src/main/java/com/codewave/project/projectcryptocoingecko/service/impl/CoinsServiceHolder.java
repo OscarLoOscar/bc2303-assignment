@@ -21,7 +21,9 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.codewave.project.projectcryptocoingecko.infra.exception.BusinessException;
+import com.codewave.project.projectcryptocoingecko.infra.response.CoinsApi;
 import com.codewave.project.projectcryptocoingecko.model.CoinsMarketResp;
+import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto.ExchangeRate;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinCurrencyMap;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinsCurrency;
 import com.codewave.project.projectcryptocoingecko.service.CoinsService;
@@ -63,10 +65,10 @@ public class CoinsServiceHolder implements CoinsService {
   }
 
   @Override
-  public HashMap<String, CoinsCurrency> getSimplePrices(List<String> cryptos, List<String> currencies)
+  public HashMap<String, CoinsCurrency> getSimplePricesByMap(List<String> cryptos, List<String> currencies)
       throws BusinessException {
-    log.info("before :" + cryptos.toString());
-    log.info("before :" + currencies.toString());
+    log.info("before :" + cryptos.toString());// [Bitcoin, dogecoin, ETH, tether]
+    log.info("before :" + currencies.toString());// [usd, hkd]
     // Alternative: String.join(",", cryptos);
     // Change the List<String> to String (bitcoin,tether)
     // incorrect path
@@ -84,5 +86,13 @@ public class CoinsServiceHolder implements CoinsService {
       log.info("after map : " + hMap.toString());
     }
     return hMap;
+  }
+
+  @Override
+  public HashMap<String, List<String>> getExchangeRates(List<String> cryptos, List<String> currencies)
+      throws BusinessException {
+    HashMap<String, List<String>> exchangeRates = new HashMap<>();
+    exchangeRates.put(cryptos.toString(), currencies);
+    return exchangeRates;
   }
 }

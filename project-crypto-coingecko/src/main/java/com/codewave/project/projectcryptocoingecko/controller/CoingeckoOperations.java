@@ -1,6 +1,7 @@
 package com.codewave.project.projectcryptocoingecko.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +25,14 @@ public interface CoingeckoOperations {
   // @RequestParam("currencies") List<String> currencies)
   // throws BusinessException;
 
+  // @GetMapping(value = "/coins/exchangerates")
+  // List<ExchangeRate> getExchangeRate(@RequestParam("cryptos") List<String>
+  // cryptos,
+  // @RequestParam("currencies") List<String> currencies)
+  // throws BusinessException;
+
   @GetMapping(value = "/coins/exchangerates")
-  List<ExchangeRate> getExchangeRate(@RequestParam("cryptos") List<String> cryptos,
+  List<Map<String, Object>> getExchangeRate(@RequestParam("cryptos") List<String> cryptos,
       @RequestParam("currencies") List<String> currencies)
       throws BusinessException;
 
