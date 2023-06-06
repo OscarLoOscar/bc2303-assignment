@@ -2,11 +2,9 @@ package com.codewave.project.projectcryptocoingecko.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.codewave.project.projectcryptocoingecko.infra.exception.BusinessException;
 import com.codewave.project.projectcryptocoingecko.model.CoinsMarketResp;
-import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinCurrencyMap;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinsCurrency;
 
 public interface CoinsService {

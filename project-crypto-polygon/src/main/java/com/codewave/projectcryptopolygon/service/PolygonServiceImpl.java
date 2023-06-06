@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import com.codewave.projectcryptopolygon.infra.exception.BusinessException;
 import com.codewave.projectcryptopolygon.infra.response.CoinsApi;
 import com.codewave.projectcryptopolygon.model.CoinExchange;
+import com.codewave.projectcryptopolygon.model.CoinExchange.ExchangeResult;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,18 +32,16 @@ public class PolygonServiceImpl implements PolygonSerice {
   @Qualifier(value = "polygonCoinUrl")
   String polygonCoinUrl;
 
+  // private CoinExchange getCoinExchange() {
+  // return restTemplate.getForObject(polygonCoinUrl, CoinExchange.class);
+  // }  
   @Override
-  public List<CoinExchange> getCoinExchangeList() {
-    try {
-      List<String> params = new ArrayList<>(Arrays.asList(null, "usd"));
-      log.info("TEST "+ params.toString());
-      CoinExchange[] coins = restTemplate.getForObject(polygonCoinUrl, CoinExchange[].class, params.toArray());
-      redisService.setCoinMarketResp(coins);
-      log.info("ABC " + coins.toString());
-      return Arrays.asList(coins);
-    } catch (RestClientException e) {
-      return Arrays.asList(redisService.getCoinMarketResp());
-    }
+  public List<ExchangeResult> getCoinExchangeList() throws BusinessException {
+    log.info("polygonCoinUrl " + polygonCoinUrl);
+    ExchangeResult[] coins = restTemplate.getForObject(polygonCoinUrl, ExchangeResult[].class);
+    redisService.setExchangeRate(coins);
+    log.info("ABC " + coins.toString());
+    return Arrays.asList(coins);
   }
 
 }

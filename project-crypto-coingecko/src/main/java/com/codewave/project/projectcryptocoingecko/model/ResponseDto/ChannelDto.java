@@ -17,14 +17,16 @@ public class ChannelDto {
 
   List<ExchangeRate> exchangeRates;
 
-  public ExchangeRate buildExahgeRate() {
+  public  ExchangeRate buildExahgeRate() {
     return new ExchangeRate();
   }
 
   @Data
+  @AllArgsConstructor
+  @NoArgsConstructor
   public class ExchangeRate {
     private String fromCurr;
     private String toCurr;
     private BigDecimal rate;
   }
-}  
+}

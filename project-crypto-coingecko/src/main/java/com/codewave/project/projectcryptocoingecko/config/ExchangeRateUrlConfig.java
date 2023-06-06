@@ -36,7 +36,7 @@ public class ExchangeRateUrlConfig {
      queryParams.add("ids", ids);
      queryParams.add("vs_currencies", vsCurrencies);
    
-    return ApiUtil.getUrl(UriScheme.HTTPS, domain, endpoint2, queryParams, pathSegment, version);
+    return ApiUtil.getUrl(UriScheme.HTTPS, domain, endpoint2, "/price",queryParams, pathSegment, version);
   }
 
 }

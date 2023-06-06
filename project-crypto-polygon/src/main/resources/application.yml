@@ -4,37 +4,18 @@ server:
 api:
   polygon:
     domain: 'api.polygon.io'
-    version: 'v2'
-    endpoint: 'aggs/ticker'
-    ticker:
-      cryptoTicker: 'X:BTCUSD'
-    range:
-      multiplier: '1'
-      timespan: 'day'
-      from: '2023-01-09'
-      to: '2023-01-09'
-    params:
-      adjusted: true
-      sort: 'asc'
-      limit: '123'
-      apiKey: 0pBc6wIRoFmb0jiNfpQkQtphDb9u_e7K
-# /v2/aggs/ticker/
-# {cryptoTicker}/
-# range/ true
-# {multiplier}/
-# {timespan}/
-# {from}/
-# {to}
-# https://api.polygon.io/v2/aggs/ticker/X:BTCUSD/range/1/day/2023-01-09/2023-01-09
-# ?adjusted=true&sort=asc&limit=120&apiKey=0pBc6wIRoFmb0jiNfpQkQtphDb9u_e7K
-# v2/aggs
-# /ticker/
-# X:BTCUSD/
-# range/
-# 1/day/
-# 2023-01-09/
-# 2023-01-09
-# ?adjusted=true&
-# sort=asc&
-# limit=120&
-# apiKey=0pBc6wIRoFmb0jiNfpQkQtphDb9u_e7K
+    simple:
+      version: 'v2'
+      endpoint: '/aggs/ticker/'
+      ticker:
+        cryptoTicker: 'X:BTCUSD'
+      range:
+        multiplier: '/1'
+        timespan: '/day'
+        from: '/2023-01-09'
+        to: '/2023-01-09'
+      params:
+        adjusted: 'true'
+        sort: 'asc'
+        limit: '120'
+        apiKey: '0pBc6wIRoFmb0jiNfpQkQtphDb9u_e7K'

@@ -40,6 +40,7 @@ public class ApiUtil {
         .host(domain)
         .path(endpoint)
         .queryParams(queryParams)
+        .path(version)
         .toUriString();
   }
 
@@ -50,6 +51,19 @@ public class ApiUtil {
         .host(domain)
         .pathSegment(pathSegments) // add slashes automatically
         .path(endpoint)
+        .queryParams(queryParams)
+        .toUriString();
+  }
+
+  public static String getUrl(UriScheme scheme, String domain, String endpoint2, String string,
+      MultiValueMap<String, String> queryParams, String pathSegment, String version) {
+    return UriComponentsBuilder.newInstance()
+        .scheme(scheme.getProtocol())
+        .host(domain)
+        .pathSegment(pathSegment)
+        .path(version)
+        .path(endpoint2)
+        .path(string)
         .queryParams(queryParams)
         .toUriString();
   }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.codewave.project.projectcryptocoingecko.infra.exception.BusinessException;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinMarketRespDto;
+import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto.ExchangeRate;
 
 public interface CoingeckoOperations {
 
@@ -18,8 +19,13 @@ public interface CoingeckoOperations {
   @ResponseStatus(value = HttpStatus.OK)
   List<CoinMarketRespDto> getAllCoinsMarketData();
 
+  // @GetMapping(value = "/coins/exchangerates")
+  // ChannelDto getExchangeRate(@RequestParam("cryptos") List<String> cryptos,
+  // @RequestParam("currencies") List<String> currencies)
+  // throws BusinessException;
+
   @GetMapping(value = "/coins/exchangerates")
-  ChannelDto getExchangeRate(@RequestParam("cryptos") List<String> cryptos,
+  List<ExchangeRate> getExchangeRate(@RequestParam("cryptos") List<String> cryptos,
       @RequestParam("currencies") List<String> currencies)
       throws BusinessException;
 
