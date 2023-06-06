@@ -17,7 +17,7 @@ public class ChannelDto {
 
   List<ExchangeRate> exchangeRates;
 
-  public  ExchangeRate buildExahgeRate() {
+  public ExchangeRate buildExahgeRate() {
     return new ExchangeRate();
   }
 

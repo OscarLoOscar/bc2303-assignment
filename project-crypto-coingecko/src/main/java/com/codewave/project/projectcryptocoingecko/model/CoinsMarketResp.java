@@ -1,7 +1,6 @@
 package com.codewave.project.projectcryptocoingecko.model;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;

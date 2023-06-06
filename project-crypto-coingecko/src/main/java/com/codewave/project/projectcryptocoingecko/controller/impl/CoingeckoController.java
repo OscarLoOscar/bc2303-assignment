@@ -1,6 +1,5 @@
 package com.codewave.project.projectcryptocoingecko.controller.impl;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,18 +8,13 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codewave.project.projectcryptocoingecko.controller.CoingeckoOperations;
-import com.codewave.project.projectcryptocoingecko.infra.enums.Currency;
 import com.codewave.project.projectcryptocoingecko.infra.exception.BusinessException;
-import com.codewave.project.projectcryptocoingecko.infra.response.CoinsApi;
-import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinMarketRespDto;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinsCurrency;
-import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto.ExchangeRate;
 import com.codewave.project.projectcryptocoingecko.service.CoinsService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -101,21 +95,7 @@ public class CoingeckoController implements CoingeckoOperations {
     log.info("exchangeRates" + exchangeRates);
     // Create a map from cryptocurrency name to CoinsCurrency object
     Map<String, CoinsCurrency> resultMap = new HashMap<>();
-
-    // for (ExchangeRate exchangeRate : exchangeRates) {
-    //   String crypto = exchangeRate.getFromCurr();
-    //   String currency = exchangeRate.getToCurr();
-    //   log.info("crypto" + crypto);
-    //   log.info("currency" + currency);
-    //   CoinsCurrency coinsCurrency = resultMap.getOrDefault(crypto, new CoinsCurrency());
-    //   if ("usd".equals(currency)) {
-    //     coinsCurrency.setUsd(exchangeRate.getRate());
-    //   } else if ("hkd".equals(currency)) {
-    //     coinsCurrency.setHkd(exchangeRate.getRate());
-    //   }
-    //   resultMap.put(crypto, coinsCurrency);
-    // }
-    // Convert the map to the desired output format
+      // Convert the map to the desired output format
     List<Map<String, Object>> outputList = new ArrayList<>();
     for (String crypto : cryptos) {
       Map<String, Object> outputMap = new HashMap<>();

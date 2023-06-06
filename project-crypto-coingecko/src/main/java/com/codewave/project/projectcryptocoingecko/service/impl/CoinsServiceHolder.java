@@ -1,34 +1,22 @@
 package com.codewave.project.projectcryptocoingecko.service.impl;
 
 import java.math.BigDecimal;
-import java.net.URI;
-import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
-import org.apache.hc.client5.http.classic.HttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.codewave.project.projectcryptocoingecko.infra.exception.BusinessException;
-import com.codewave.project.projectcryptocoingecko.infra.response.CoinsApi;
 import com.codewave.project.projectcryptocoingecko.model.CoinsMarketResp;
-import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto.ExchangeRate;
-import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinCurrencyMap;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinsCurrency;
 import com.codewave.project.projectcryptocoingecko.service.CoinsService;
 
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -92,7 +80,9 @@ public class CoinsServiceHolder implements CoinsService {
   public HashMap<String, List<String>> getExchangeRates(List<String> cryptos, List<String> currencies)
       throws BusinessException {
     HashMap<String, List<String>> exchangeRates = new HashMap<>();
-    exchangeRates.put(cryptos.toString(), currencies);
+    for (int i = 0; i < cryptos.size(); ++i) {
+      exchangeRates.put(cryptos.get(i), currencies);
+    }
     return exchangeRates;
   }
 }

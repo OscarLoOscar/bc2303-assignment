@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.codewave.project.projectcryptocoingecko.infra.util.RedisUtil;
 import com.codewave.project.projectcryptocoingecko.model.CoinsMarketResp;
-import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto;
-import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinMarketRespDto;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto.ExchangeRate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

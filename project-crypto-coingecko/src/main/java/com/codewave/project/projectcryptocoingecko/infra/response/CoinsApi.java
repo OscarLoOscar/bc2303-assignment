@@ -5,21 +5,16 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.codewave.project.projectcryptocoingecko.config.ExchangeRateUrlConfig;
 import com.codewave.project.projectcryptocoingecko.infra.exception.BusinessException;
-import com.codewave.project.projectcryptocoingecko.infra.util.UriScheme;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto;
-import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinCurrencyMap;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinsCurrency;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto.ExchangeRate;
 

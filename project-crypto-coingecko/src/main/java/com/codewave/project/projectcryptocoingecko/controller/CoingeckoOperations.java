@@ -5,14 +5,11 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.codewave.project.projectcryptocoingecko.infra.exception.BusinessException;
-import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinMarketRespDto;
-import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto.ExchangeRate;
 
 public interface CoingeckoOperations {
 
@@ -32,6 +29,7 @@ public interface CoingeckoOperations {
   // throws BusinessException;
 
   @GetMapping(value = "/coins/exchangerates")
+  @ResponseStatus(value = HttpStatus.OK)
   List<Map<String, Object>> getExchangeRate(@RequestParam("cryptos") List<String> cryptos,
       @RequestParam("currencies") List<String> currencies)
       throws BusinessException;
