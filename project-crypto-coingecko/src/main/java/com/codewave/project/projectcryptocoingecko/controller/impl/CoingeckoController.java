@@ -91,7 +91,7 @@ public class CoingeckoController implements CoingeckoOperations {
       throws BusinessException {
     log.info("crypto" + cryptos);
     log.info("currency" + currencies);
-    HashMap<String, List<String>> exchangeRates = coinsService.getExchangeRates(cryptos, currencies);
+    HashMap<String, List<String>> exchangeRates = coinsService.getExchangeService(cryptos, currencies);
     log.info("exchangeRates" + exchangeRates);
     // Create a map from cryptocurrency name to CoinsCurrency object
     Map<String, CoinsCurrency> resultMap = new HashMap<>();

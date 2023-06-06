@@ -1,6 +1,7 @@
 package com.codewave.project.projectcryptocoingecko.service.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -12,9 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.codewave.project.projectcryptocoingecko.infra.enums.Currency;
 import com.codewave.project.projectcryptocoingecko.infra.exception.BusinessException;
 import com.codewave.project.projectcryptocoingecko.model.CoinsMarketResp;
+import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinsCurrency;
+import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto.ExchangeRate;
 import com.codewave.project.projectcryptocoingecko.service.CoinsService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +39,7 @@ public class CoinsServiceHolder implements CoinsService {
 
   @Autowired
   @Qualifier(value = "exchangeRateUrl")
-  String exchangeRateUrl;
+  private static String exchangeRateUrl;
 
   @Override
   public List<CoinsMarketResp> getAllData() {
@@ -77,12 +81,16 @@ public class CoinsServiceHolder implements CoinsService {
   }
 
   @Override
-  public HashMap<String, List<String>> getExchangeRates(List<String> cryptos, List<String> currencies)
+  public HashMap<String, List<String>> getExchangeService(List<String> cryptos, List<String> currencies)
       throws BusinessException {
-    HashMap<String, List<String>> exchangeRates = new HashMap<>();
-    for (int i = 0; i < cryptos.size(); ++i) {
-      exchangeRates.put(cryptos.get(i), currencies);
+    HashMap<String, List<String>> hMap = new HashMap<>();
+    for (String crypto : cryptos) {
+      hMap.put(crypto, new ArrayList<>());
+      for (String currency : currencies) {
+        hMap.get(crypto).add(currency);
+      }
     }
-    return exchangeRates;
+    log.info("After map " + hMap.toString());
+    return hMap;
   }
 }
