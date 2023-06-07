@@ -14,7 +14,10 @@ import org.springframework.web.client.RestTemplate;
 import com.codewave.projectcryptopolygon.infra.exception.BusinessException;
 import com.codewave.projectcryptopolygon.infra.response.CoinsApi;
 import com.codewave.projectcryptopolygon.model.CoinExchange;
-import com.codewave.projectcryptopolygon.model.CoinExchange.ExchangeResult;
+import com.codewave.projectcryptopolygon.model.CoinExchange.Results;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,19 +32,35 @@ public class PolygonServiceImpl implements PolygonSerice {
   RedisService redisService;
 
   @Autowired
-  @Qualifier(value = "polygonCoinUrl")
-  String polygonCoinUrl;
+  @Qualifier(value = "polygonUrl")
+  String polygonUrl;
 
-  // private CoinExchange getCoinExchange() {
-  // return restTemplate.getForObject(polygonCoinUrl, CoinExchange.class);
-  // }  
   @Override
-  public List<ExchangeResult> getCoinExchangeList() throws BusinessException {
-    log.info("polygonCoinUrl " + polygonCoinUrl);
-    ExchangeResult[] coins = restTemplate.getForObject(polygonCoinUrl, ExchangeResult[].class);
-    redisService.setExchangeRate(coins);
-    log.info("ABC " + coins.toString());
-    return Arrays.asList(coins);
+  public List<Results> getCoinExchangeList()
+      throws BusinessException {
+    log.info("polygonUrl " + polygonUrl);
+    List<Results> responseBody = restTemplate.getForObject(polygonUrl, List.class);
+    return responseBody;
+  }
+
+  @Override
+  public List<Results> getMyObjects() throws Exception {
+    String jsonResponse = restTemplate.getForObject(polygonUrl, String.class);
+    ObjectMapper objectMapper = new ObjectMapper();
+    JsonNode root = objectMapper.readTree(jsonResponse);
+
+    if (root.isArray()) {
+      List<Results> result = objectMapper.readValue(root.traverse(), new TypeReference<List<Results>>() {
+      });
+      return result;
+
+    } else {
+      Results result = objectMapper.treeToValue(root, Results.class);
+      List<Results> results = new ArrayList<>();
+      results.add(result);
+      return results;
+
+    }
   }
 
 }

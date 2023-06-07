@@ -1,4 +1,4 @@
-package com.codewave.projectcryptopolygon.infra.util;
+package com.codewave.project.infra.util;
 
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -40,6 +40,7 @@ public class ApiUtil {
         .host(domain)
         .path(endpoint)
         .queryParams(queryParams)
+        .path(version)
         .toUriString();
   }
 
@@ -54,47 +55,17 @@ public class ApiUtil {
         .toUriString();
   }
 
-  public static String getUrl(UriScheme scheme, String domain, String version, String endPoint,
-      MultiValueMap<String, String> queryParams, String... pathSegments) {
+  public static String getUrl(UriScheme scheme, String domain, String endpoint2, String string,
+      MultiValueMap<String, String> queryParams, String pathSegment, String version) {
     return UriComponentsBuilder.newInstance()
         .scheme(scheme.getProtocol())
         .host(domain)
+        .pathSegment(pathSegment)
         .path(version)
-        .path(endPoint)
-        .pathSegment(pathSegments)
-        .queryParams(queryParams)
-        .toUriString();
-  }
-
-  public static String getUrl(UriScheme scheme, String domain, String version, String endpoint,
-      String cryptoTicker, String string, String multiplier, String timespan, String from, String to,
-      MultiValueMap<String, String> queryParams) {
-    return UriComponentsBuilder.newInstance()
-        .scheme(scheme.getProtocol())
-        .host(domain)
-        .path(version)
-        .path(endpoint)
-        .path(cryptoTicker)
-        .path(string)
-        .path(multiplier)
-        .path(timespan)
-        .path(from)
-        .path(to)
-        .queryParams(queryParams)
-        .toUriString();
-  }
-
-  public static String getUrl(UriScheme scheme, String domain, String version, String endpoint, String path,
-      String cryptoTicker, String string, MultiValueMap<String, String> queryParams) {
-        return UriComponentsBuilder.newInstance()
-        .scheme(scheme.getProtocol())
-        .host(domain)
-        .path(version)
-        .path(endpoint)
-        .path(path)
-        .path(cryptoTicker)
+        .path(endpoint2)
         .path(string)
         .queryParams(queryParams)
         .toUriString();
   }
+
 }

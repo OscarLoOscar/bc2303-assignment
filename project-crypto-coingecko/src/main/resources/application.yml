@@ -27,6 +27,6 @@ api:
       pathSegment: 'api'
       version: 'v3'
       params2: 
-        ids: 'Bitcoin,Ethereum,Tether,Dogecoin'
+        ids: 'Bitcoin,Ethereum,Tether,Dogecoin,binancecoin'
         vs_currencies: 'usd,hkd'
       # ?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false

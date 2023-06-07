@@ -54,6 +54,7 @@ public class CoinsServiceHolder implements CoinsService {
   public HashMap<String, CoinsCurrency> getExchangeService(List<String> cryptos,
       List<String> currencies)
       throws BusinessException {
+        //responseBody can be every data structure ! 
     HashMap<String, CoinsCurrency> responseBody = restTemplate.getForObject(exchangeRateUrl, HashMap.class);
     log.info("Map responseBody  " + responseBody);
     log.info("responseBody key " + responseBody.keySet().toString());

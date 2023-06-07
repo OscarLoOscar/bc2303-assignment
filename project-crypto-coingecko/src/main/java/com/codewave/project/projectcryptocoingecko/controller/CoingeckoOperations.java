@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.codewave.project.projectcryptocoingecko.infra.exception.BusinessException;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinMarketRespDto;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinsCurrency;
-
+//show on the postman
 public interface CoingeckoOperations {
 
   @GetMapping(value = "/coin/market")

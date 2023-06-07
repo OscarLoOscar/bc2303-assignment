@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.springframework.http.codec.ServerCodecConfigurer;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -17,28 +16,28 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class CoinExchange implements Serializable {
-
-  BigDecimal coint;
-  String status;
-  String ticket;
-  BigDecimal queryCount;
-  BigDecimal resultCount;
+  String ticker;
+  Integer queryCount;
+  Integer resultCount;
   Boolean adjusted;
-  @JsonProperty(value = "results")
-  List<ExchangeResult> exchangeResults;
+  List<Results> resultsList;
+  String status;
+  @JsonProperty("request_id")
+  String requestId;
+  Integer count;
 
   public String getCryptoString() {
-    return this.ticket.substring(2, 5); // X:BTCUSD-> BTC
+    return this.ticker.substring(2, 5); // X:BTCUSD-> BTC
   }
 
   public String getCurrencyString() {
-    return this.ticket.substring(5, 8); // X:BTCUSD - > USD
+    return this.ticker.substring(5, 8); // X:BTCUSD - > USD
   }
 
-  @Data
   @AllArgsConstructor
   @NoArgsConstructor
-  public static class ExchangeResult implements Serializable {
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  public static class Results {
     @JsonProperty(value = "T")
     String ticker;
     @JsonProperty(value = "v")

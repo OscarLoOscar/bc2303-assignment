@@ -4,18 +4,12 @@ server:
 api:
   polygon:
     domain: 'api.polygon.io'
-    simple:
-      version: 'v2'
-      endpoint: '/aggs/ticker/'
-      ticker:
-        cryptoTicker: 'X:BTCUSD'
-      range:
-        multiplier: '/1'
-        timespan: '/day'
-        from: '/2023-01-09'
-        to: '/2023-01-09'
-      params:
-        adjusted: 'true'
-        sort: 'asc'
-        limit: '120'
-        apiKey: '0pBc6wIRoFmb0jiNfpQkQtphDb9u_e7K'
+    version: 'v2/'
+    endpoint: 'aggs/'
+    path: 'ticker/'
+    ticker:
+      cryptoTicker: X:BTCUSD
+    params:
+     adjusted: 'true'
+     apiKey: '0pBc6wIRoFmb0jiNfpQkQtphDb9u_e7K'
+
