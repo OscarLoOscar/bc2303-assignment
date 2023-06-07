@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -81,46 +82,23 @@ public class CoinsServiceHolder implements CoinsService {
   }
 
   @Override
-  public HashMap<String, List<String>> getExchangeService(List<String> cryptos, List<String> currencies)
+  public HashMap<String, HashMap<String, CoinsCurrency>> getExchangeService(List<String> cryptos, List<String> currencies)
       throws BusinessException {
-    HashMap<String, List<String>> hMap = new HashMap<>();
-    log.info("input : " + cryptos.get(0) + " , " + cryptos.get(1) + " , " + cryptos.get(2) + " , " + cryptos.get(3));
-    for (String crypto : cryptos) {
-      hMap.put(crypto, new ArrayList<>());
-      // for (int i = 0; i < cryptos.size(); ++i) {
-      // hMap.put(cryptos.get(i), new ArrayList<>());
-      log.info("after input crypto ");
-      for (String k : hMap.keySet()) {
-        System.out.println("key : " + k);
-      }
-      for (String currency : currencies) {
-        hMap.get(crypto).add(currency);
-        log.info("1st step : " + hMap.toString());
-        List<String> exchangeRates = new ArrayList<>();
-        log.info("exchangeRateUrl 1 " + exchangeRateUrl);
-        try {
-          String responseBody = restTemplate.getForObject(exchangeRateUrl, String.class);
-          log.info("responseBody 3 " + responseBody);
-          exchangeRates.add(responseBody);
-          log.info("exchangeRates 2 " + exchangeRates);
-          log.info("exchangeRates 2.1 " + exchangeRates.get(0));
-          log.info("exchangeRates 2.2 " + exchangeRates.get(1));
-          log.info("exchangeRates 2.3 " + exchangeRates.get(2));
-          log.info("exchangeRates 2.4 " + exchangeRates.get(3));
+    Map responseBody = restTemplate.getForObject(exchangeRateUrl, Map.class);
+    log.info("Map responseBody  " + responseBody);
 
-        } catch (Exception e) {
-        }
-        hMap.put(crypto, exchangeRates);
+    HashMap<String, HashMap<String, CoinsCurrency>> hMap = new HashMap<>();
+    for (String crypto : cryptos) {
+      hMap.put(crypto, new HashMap<>());
+      // key : dogecoin
+      // key : tether
+      // key : Bitcoin
+      // key : ETH
+      for (String currency : currencies) {
+        hMap.get(crypto).put(currency, null);
       }
       log.info("ServiceHolder Exchange Rates: " + hMap.toString());
-      return hMap;
     }
     return hMap;
   }
 }
-// }
-// }
-// log.info("After map " + hMap.toString());
-// return hMap;
-// }
-// }

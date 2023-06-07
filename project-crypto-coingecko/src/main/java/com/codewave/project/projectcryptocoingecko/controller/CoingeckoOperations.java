@@ -1,5 +1,7 @@
 package com.codewave.project.projectcryptocoingecko.controller;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.codewave.project.projectcryptocoingecko.infra.exception.BusinessException;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinMarketRespDto;
+import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinsCurrency;
 
 public interface CoingeckoOperations {
 
@@ -30,7 +33,7 @@ public interface CoingeckoOperations {
 
   @GetMapping(value = "/coins/exchangerates")
   @ResponseStatus(value = HttpStatus.OK)
-  List<Map<String, Object>> getExchangeRate(@RequestParam("cryptos") List<String> cryptos,
+  HashMap<String, HashMap<String, CoinsCurrency>> getExchangeRate(@RequestParam("cryptos") List<String> cryptos,
       @RequestParam("currencies") List<String> currencies)
       throws BusinessException;
 

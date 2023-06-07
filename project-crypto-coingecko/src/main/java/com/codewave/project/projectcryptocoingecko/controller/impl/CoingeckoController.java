@@ -1,5 +1,6 @@
 package com.codewave.project.projectcryptocoingecko.controller.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,28 +88,21 @@ public class CoingeckoController implements CoingeckoOperations {
   // }
 
   @Override
-  public List<Map<String, Object>> getExchangeRate(List<String> cryptos, List<String> currencies)
+  public HashMap<String, HashMap<String, CoinsCurrency>> getExchangeRate(List<String> cryptos, List<String> currencies)
       throws BusinessException {
-    log.info("crypto" + cryptos);
-    log.info("currency" + currencies);
-    HashMap<String, List<String>> exchangeRates = coinsService.getExchangeService(cryptos, currencies);
-    log.info("Controller exchangeRates" + exchangeRates);
+    HashMap<String, HashMap<String, CoinsCurrency>> exchangeRates = coinsService.getExchangeService(cryptos,
+        currencies);
     // Create a map from cryptocurrency name to CoinsCurrency object
-    Map<String, CoinsCurrency> resultMap = new HashMap<>();
-      // Convert the map to the desired output format
-    List<Map<String, Object>> outputList = new ArrayList<>();
+   HashMap <String, CoinsCurrency> resultMap = new HashMap<>();
+    // Convert the map to the desired output format
+    HashMap<String, HashMap<String, CoinsCurrency>> outputList = new HashMap<>();
     for (String crypto : cryptos) {
-      Map<String, Object> outputMap = new HashMap<>();
+      HashMap<String, CoinsCurrency> outputMap = new HashMap<>();
       CoinsCurrency coinsCurrency = resultMap.getOrDefault(crypto, new CoinsCurrency());
       outputMap.put(crypto, coinsCurrency);
-      outputList.add(outputMap);
+      outputList.put(crypto, outputMap);
     }
 
     return outputList;
   }
-
-  // @Override
-  // public List<String> stringToList(List<String> coins) {
-  // return coins;
-  // }
 }
