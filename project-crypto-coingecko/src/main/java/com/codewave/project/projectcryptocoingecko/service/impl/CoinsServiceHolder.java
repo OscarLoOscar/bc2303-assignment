@@ -1,12 +1,8 @@
 package com.codewave.project.projectcryptocoingecko.service.impl;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,12 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import com.codewave.project.projectcryptocoingecko.infra.enums.Currency;
 import com.codewave.project.projectcryptocoingecko.infra.exception.BusinessException;
 import com.codewave.project.projectcryptocoingecko.model.CoinsMarketResp;
-import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto;
 import com.codewave.project.projectcryptocoingecko.model.ResponseDto.CoinsCurrency;
-import com.codewave.project.projectcryptocoingecko.model.ResponseDto.ChannelDto.ExchangeRate;
 import com.codewave.project.projectcryptocoingecko.service.CoinsService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -58,47 +51,13 @@ public class CoinsServiceHolder implements CoinsService {
   }
 
   @Override
-  public HashMap<String, CoinsCurrency> getSimplePricesByMap(List<String> cryptos, List<String> currencies)
+  public HashMap<String, CoinsCurrency> getExchangeService(List<String> cryptos,
+      List<String> currencies)
       throws BusinessException {
-    log.info("before :" + cryptos.toString());// [Bitcoin, dogecoin, ETH, tether]
-    log.info("before :" + currencies.toString());// [usd, hkd]
-    // Alternative: String.join(",", cryptos);
-    // Change the List<String> to String (bitcoin,tether)
-    // incorrect path
-    HashMap<String, CoinsCurrency> hMap = new LinkedHashMap<>();
-    for (String crypto : cryptos) {
-      CoinsCurrency coinsCurrency = new CoinsCurrency();
-      try {
-        coinsCurrency.setUsd(new BigDecimal(currencies.get(0)));
-        coinsCurrency.setHkd(new BigDecimal(currencies.get(1)));
-      } catch (NumberFormatException e) {
-        log.error("Error converting currency value to BigDecimal: " + e.getMessage());
-      }
-      log.info("after : " + coinsCurrency.toString());
-      hMap.put(crypto, coinsCurrency);
-      log.info("after map : " + hMap.toString());
-    }
-    return hMap;
-  }
-
-  @Override
-  public HashMap<String, HashMap<String, CoinsCurrency>> getExchangeService(List<String> cryptos, List<String> currencies)
-      throws BusinessException {
-    Map responseBody = restTemplate.getForObject(exchangeRateUrl, Map.class);
+    HashMap<String, CoinsCurrency> responseBody = restTemplate.getForObject(exchangeRateUrl, HashMap.class);
     log.info("Map responseBody  " + responseBody);
-
-    HashMap<String, HashMap<String, CoinsCurrency>> hMap = new HashMap<>();
-    for (String crypto : cryptos) {
-      hMap.put(crypto, new HashMap<>());
-      // key : dogecoin
-      // key : tether
-      // key : Bitcoin
-      // key : ETH
-      for (String currency : currencies) {
-        hMap.get(crypto).put(currency, null);
-      }
-      log.info("ServiceHolder Exchange Rates: " + hMap.toString());
-    }
-    return hMap;
+    log.info("responseBody key " + responseBody.keySet().toString());
+    log.info("responseBody value" + responseBody.values());
+    return responseBody;
   }
 }

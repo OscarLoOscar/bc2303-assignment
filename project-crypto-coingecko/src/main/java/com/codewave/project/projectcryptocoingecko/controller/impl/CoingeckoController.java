@@ -1,10 +1,7 @@
 package com.codewave.project.projectcryptocoingecko.controller.impl;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -38,71 +35,24 @@ public class CoingeckoController implements CoingeckoOperations {
         .collect(Collectors.toList());
   }
 
-  // @Override
-  // public ChannelDto getExchangeRate(List<String> cryptos,
-  // List<String> currencies) throws BusinessException {
-  // return ChannelDto.builder()
-  // .exchangeRates(CoinsApi.map(coinsService.getSimplePrices(cryptos,
-  // currencies)))
-  // .build();
-  // }
-
-  // @Override
-  // public List<ExchangeRate> getExchangeRate(List<String> cryptos, List<String>
-  // currencies) throws BusinessException {
-
-  // HashMap<String, CoinsCurrency> result =
-  // coinsService.getSimplePricesByMap(cryptos, currencies);
-  // log.info("contro test 1 = " + result.values());
-  // //[CoinsCurrency(usd=null, hkd=null), CoinsCurrency(usd=null, hkd=null),
-  // CoinsCurrency(usd=null, hkd=null), CoinsCurrency(usd=null, hkd=null)]
-  // log.info("contro test 1 = " + result.get(cryptos));
-  // log.info("contro test 1 = " + result.get(currencies));
-  // Map<String, Map<String, BigDecimal>> mapResult = new HashMap<>();
-
-  // for (Map.Entry<String, CoinsCurrency> entry : result.entrySet()) {
-  // Map<String, BigDecimal> prices = new HashMap<>();
-  // prices.put("usd", entry.getValue().getUsd());
-  // prices.put("hkd", entry.getValue().getHkd());
-  // mapResult.put(entry.getKey(), prices);
-  // }
-
-  // List<ExchangeRate> exchangeRates = new ArrayList<>();
-  // ChannelDto channelDto = new ChannelDto();
-
-  // for (String crypto : cryptos) {
-  // Map<String, BigDecimal> prices = mapResult.get(crypto);
-  // if (prices == null) {
-  // continue;
-  // }
-  // for (String curriency : currencies) {
-  // BigDecimal rate = prices.get(curriency);
-  // ExchangeRate exchangeRate = channelDto.buildExahgeRate();
-  // exchangeRate.setFromCurr(crypto);
-  // exchangeRate.setToCurr(curriency);
-  // exchangeRate.setRate(rate);
-  // exchangeRates.add(exchangeRate);
-  // }
-  // }
-  // return exchangeRates;
-  // }
-
   @Override
-  public HashMap<String, HashMap<String, CoinsCurrency>> getExchangeRate(List<String> cryptos, List<String> currencies)
+  public HashMap<String, CoinsCurrency> getExchangeRate(List<String> cryptos, List<String> currencies)
       throws BusinessException {
-    HashMap<String, HashMap<String, CoinsCurrency>> exchangeRates = coinsService.getExchangeService(cryptos,
+    HashMap<String, CoinsCurrency> exchangeRates = coinsService.getExchangeService(cryptos,
         currencies);
     // Create a map from cryptocurrency name to CoinsCurrency object
-   HashMap <String, CoinsCurrency> resultMap = new HashMap<>();
-    // Convert the map to the desired output format
-    HashMap<String, HashMap<String, CoinsCurrency>> outputList = new HashMap<>();
-    for (String crypto : cryptos) {
-      HashMap<String, CoinsCurrency> outputMap = new HashMap<>();
-      CoinsCurrency coinsCurrency = resultMap.getOrDefault(crypto, new CoinsCurrency());
-      outputMap.put(crypto, coinsCurrency);
-      outputList.put(crypto, outputMap);
-    }
+    // HashMap <String, CoinsCurrency> resultMap = new HashMap<>();
 
-    return outputList;
+    // Convert the map to the desired output format
+    // HashMap<String, HashMap<String, CoinsCurrency>> outputList = new HashMap<>();
+    // for (String crypto : cryptos) {
+    // HashMap<String, CoinsCurrency> outputMap = new HashMap<>();
+    // CoinsCurrency coinsCurrency = resultMap.getOrDefault(crypto, new
+    // CoinsCurrency());
+    // outputMap.put(crypto, coinsCurrency);
+    // outputList.put(crypto, outputMap);
+    // }
+
+    return exchangeRates;
   }
 }
