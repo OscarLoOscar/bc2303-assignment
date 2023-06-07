@@ -39,7 +39,7 @@ public class CoinsServiceHolder implements CoinsService {
 
   @Autowired
   @Qualifier(value = "exchangeRateUrl")
-  private static String exchangeRateUrl;
+  String exchangeRateUrl;
 
   @Override
   public List<CoinsMarketResp> getAllData() {
@@ -84,13 +84,43 @@ public class CoinsServiceHolder implements CoinsService {
   public HashMap<String, List<String>> getExchangeService(List<String> cryptos, List<String> currencies)
       throws BusinessException {
     HashMap<String, List<String>> hMap = new HashMap<>();
+    log.info("input : " + cryptos.get(0) + " , " + cryptos.get(1) + " , " + cryptos.get(2) + " , " + cryptos.get(3));
     for (String crypto : cryptos) {
       hMap.put(crypto, new ArrayList<>());
+      // for (int i = 0; i < cryptos.size(); ++i) {
+      // hMap.put(cryptos.get(i), new ArrayList<>());
+      log.info("after input crypto ");
+      for (String k : hMap.keySet()) {
+        System.out.println("key : " + k);
+      }
       for (String currency : currencies) {
         hMap.get(crypto).add(currency);
+        log.info("1st step : " + hMap.toString());
+        List<String> exchangeRates = new ArrayList<>();
+        log.info("exchangeRateUrl 1 " + exchangeRateUrl);
+        try {
+          String responseBody = restTemplate.getForObject(exchangeRateUrl, String.class);
+          log.info("responseBody 3 " + responseBody);
+          exchangeRates.add(responseBody);
+          log.info("exchangeRates 2 " + exchangeRates);
+          log.info("exchangeRates 2.1 " + exchangeRates.get(0));
+          log.info("exchangeRates 2.2 " + exchangeRates.get(1));
+          log.info("exchangeRates 2.3 " + exchangeRates.get(2));
+          log.info("exchangeRates 2.4 " + exchangeRates.get(3));
+
+        } catch (Exception e) {
+        }
+        hMap.put(crypto, exchangeRates);
       }
+      log.info("ServiceHolder Exchange Rates: " + hMap.toString());
+      return hMap;
     }
-    log.info("After map " + hMap.toString());
     return hMap;
   }
 }
+// }
+// }
+// log.info("After map " + hMap.toString());
+// return hMap;
+// }
+// }
