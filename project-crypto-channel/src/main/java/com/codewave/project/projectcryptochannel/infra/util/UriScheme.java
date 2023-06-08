@@ -1,4 +1,4 @@
-package com.codewave.project.infra.util;
+package com.codewave.project.projectcryptochannel.infra.util;
 
 import lombok.Getter;
 

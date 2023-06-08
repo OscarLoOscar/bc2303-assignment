@@ -1,9 +1,9 @@
-package com.codewave.project.infra.response;
+package com.codewave.project.projectcryptochannel.infra.response;
 
 
 
-import com.codewave.project.infra.exception.BizCode;
-import com.codewave.project.infra.exception.BusinessException;
+import com.codewave.project.projectcryptochannel.infra.exception.BizCode;
+import com.codewave.project.projectcryptochannel.infra.exception.BusinessException;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

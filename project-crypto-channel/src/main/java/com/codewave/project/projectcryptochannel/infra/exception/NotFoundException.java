@@ -1,4 +1,4 @@
-package com.codewave.project.infra.exception;
+package com.codewave.project.projectcryptochannel.infra.exception;
 
 /**
  * Checked Exception

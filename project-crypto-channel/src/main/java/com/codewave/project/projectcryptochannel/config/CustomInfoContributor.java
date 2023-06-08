@@ -1,4 +1,4 @@
-package com.codewave.project.config;
+package com.codewave.project.projectcryptochannel.config;
 
 import java.util.HashMap;
 import java.util.Map;

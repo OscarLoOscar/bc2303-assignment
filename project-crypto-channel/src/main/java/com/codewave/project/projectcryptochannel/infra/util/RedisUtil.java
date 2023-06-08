@@ -1,4 +1,4 @@
-package com.codewave.project.infra.util;
+package com.codewave.project.projectcryptochannel.infra.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;

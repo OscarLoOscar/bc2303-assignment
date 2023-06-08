@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ChanllelTrans {
+public class ChannelTrans {
   private Long id;
   private String domainVersion;
   private String domainUrl;

@@ -1,4 +1,4 @@
-package com.codewave.project.config;
+package com.codewave.project.projectcryptochannel.config;
 
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;

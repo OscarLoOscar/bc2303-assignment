@@ -1,4 +1,4 @@
-package com.codewave.project.infra.exception;
+package com.codewave.project.projectcryptochannel.infra.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 
-import com.codewave.project.infra.response.ApiResponse;
+import com.codewave.project.projectcryptochannel.infra.response.ApiResponse;
 
 
 
