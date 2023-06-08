@@ -27,10 +27,14 @@ public class CoinExchange implements Serializable {
   Integer count;
 
   public String getCryptoString() {
-    return this.ticker.substring(2, 5); // X:BTCUSD-> BTC
+    if(ticker.length()>8)
+    return this.ticker.substring(2, 6);
+    return this.ticker.substring(2, 5); // X:BTCUSD-> BTC , X:USDTUSD 
   }
 
   public String getCurrencyString() {
+    if(ticker.length()>8)
+    return this.ticker.substring(6, 9);
     return this.ticker.substring(5, 8); // X:BTCUSD - > USD
   }
 

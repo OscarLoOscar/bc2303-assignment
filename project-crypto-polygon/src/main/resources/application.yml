@@ -8,7 +8,7 @@ api:
     endpoint: 'aggs/'
     path: 'ticker/'
     ticker:
-      cryptoTicker: 'X:BTCUSD'
+      cryptoTicker: 'X:USDTUSD'
     params:
      adjusted: 'true'
      apiKey: '0pBc6wIRoFmb0jiNfpQkQtphDb9u_e7K'
