@@ -18,9 +18,9 @@ import lombok.NoArgsConstructor;
 public class CoinExchange implements Serializable {
   String ticker;
   Integer queryCount;
-  Integer resultCount;
+  Integer resultsCount;
   Boolean adjusted;
-  List<Results> resultsList;
+  List<Result> Results;
   String status;
   @JsonProperty("request_id")
   String requestId;
@@ -37,7 +37,7 @@ public class CoinExchange implements Serializable {
   @AllArgsConstructor
   @NoArgsConstructor
   @JsonIgnoreProperties(ignoreUnknown = true)
-  public static class Results {
+  public static class Result {
     @JsonProperty(value = "T")
     String ticker;
     @JsonProperty(value = "v")
@@ -55,7 +55,7 @@ public class CoinExchange implements Serializable {
     @JsonProperty(value = "t")
     BigDecimal unixMsecTimestamp;
     @JsonProperty(value = "n")
-    BigDecimal numberOfTransactions;
+    Integer numberOfTransactions;
 
   }
 }

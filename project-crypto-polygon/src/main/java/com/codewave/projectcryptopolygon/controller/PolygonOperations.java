@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.codewave.projectcryptopolygon.infra.exception.BusinessException;
-import com.codewave.projectcryptopolygon.model.CoinExchange.Results;
+import com.codewave.projectcryptopolygon.model.CoinExchange;
+import com.codewave.projectcryptopolygon.model.CoinExchange.Result;
 
 public interface PolygonOperations {
 
   @GetMapping(value = "/price")
   @ResponseStatus(value = HttpStatus.OK)
-  List<Results> getExchangeRate() throws Exception ;
+  //List<Result> getExchangeRate() throws Exception ;
+
+  CoinExchange getExchangeRate() throws Exception ;
 }

@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codewave.projectcryptopolygon.infra.exception.BusinessException;
-import com.codewave.projectcryptopolygon.model.CoinExchange.Results;
+import com.codewave.projectcryptopolygon.model.CoinExchange;
+import com.codewave.projectcryptopolygon.model.CoinExchange.Result;
 import com.codewave.projectcryptopolygon.service.PolygonSerice;
 
 @RestController
@@ -22,15 +23,21 @@ public class PolygonController implements PolygonOperations {
   ModelMapper modelMapper;
 
   // @Override
-  // public List<Results> getExchangeRate() throws BusinessException {
-  //   List<Results> Results = polygonSerice.getCoinExchangeList();
-  //   return Results;
+  // public List<Result> getExchangeRate() throws BusinessException {
+  //   List<Result> Result = polygonSerice.getCoinExchangeList();
+  //   return Result;
+  // }
+
+  // correct
+  // @Override
+  // public List<Result> getExchangeRate() throws Exception {
+  //   List<Result> Result = polygonSerice.getMyObjects();
+  //   return Result;
   // }
 
   @Override
-  public List<Results> getExchangeRate() throws Exception {
-    List<Results> Results = polygonSerice.getMyObjects();
-    return Results;
+  public CoinExchange getExchangeRate() throws Exception {
+    CoinExchange Result = polygonSerice.getMyObjects();
+    return Result;
   }
-
 }
