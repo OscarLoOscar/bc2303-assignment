@@ -1,2 +1,19 @@
 server: 
   port: 8087
+
+spring.datasource:
+  url: jdbc:mysql://localhost:3306/sys
+  username: root
+  password: 
+  driver-class-name: com.mysql.cj.jdbc.Driver
+sql:
+  init:
+    schema-locations: classpath:ddl/DDL_DROP.sql, classpath:ddl/DDL_TUSERS.sql, classpath:ddl/DDL_TPRODUCTS.sql, classpath:ddl/DDL_TPRODUCT_DISCOUNTS.sql, classpath:ddl/DDL_TSHOPPING_CARTS.sql, classpath:ddl/DDL_TINVOICES.sql
+      # data-locations: classpath:DML_STUDENTS.sql
+    mode: always # always
+
+spring.jpa:
+  properties.hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+  hibernate.ddl-auto: none
+  show-sql: true
+

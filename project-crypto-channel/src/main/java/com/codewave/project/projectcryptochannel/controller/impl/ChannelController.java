@@ -1,5 +1,9 @@
 package com.codewave.project.projectcryptochannel.controller.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -7,40 +11,60 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codewave.project.projectcryptochannel.controller.ChannelOperation;
+import com.codewave.project.projectcryptochannel.model.ChannelTrans;
 import com.codewave.project.projectcryptochannel.model.Channels;
-import com.codewave.project.projectcryptochannel.model.dto.ChannelsDto;
+import com.codewave.project.projectcryptochannel.repository.ChannelRepository;
+import com.codewave.project.projectcryptochannel.repository.ChannelTransRepository;
 import com.codewave.project.projectcryptochannel.service.ChannelService;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @RestController
 @RequestMapping(value = "/crypto/admin/api/v1")
 public class ChannelController implements ChannelOperation {
-  @Autowired
-  ModelMapper modelMapper;
 
   @Autowired
   ChannelService channelService;
 
+  @Autowired
+  ChannelRepository channelRepository;
+
+  @Autowired
+  ChannelTransRepository channelTransRepository;
+
+  @Autowired
+  ModelMapper modelMapper;
+
   @Override
-  public ResponseEntity<ChannelsDto> createNewChannelById(Channels channels, Long id) {
-    Channels result = channelService.addChannelById(channels, id);
-    log.info("Controller : " + result);
-    ResponseEntity<ChannelsDto> response = null;
-    if (result != null) {
-      ChannelsDto channelsDto = modelMapper.map(result, ChannelsDto.class);
-      response = ResponseEntity.ok(channelsDto);
-    } else {
-      response = ResponseEntity.notFound().build();
+  public Channels getChannel(Long id) {
+    // List<Channels> change = channelService.getAll();
+    // Channels result = modelMapper.map(change, Channels.class);
+    // return result;
+
+    // Optional<Channels> optionalChannel = channelService.get(id);
+    // if (optionalChannel.isPresent()) {
+    // Channels result = modelMapper.map(optionalChannel.get(), Channels.class);
+    // return result;
+    // }
+    // return null;
+    return channelRepository.findById(id).orElseGet(null);
+  }
+
+  @Override
+  public Channels createChannel(Channels channel) {
+    return channelRepository.save(channel);
+  }
+
+  @Override
+  public ChannelTrans createTransaction(Long channelId, ChannelTrans channelTrans) {
+    Optional<Channels> optionalChannel = channelService.get(channelId);
+    if (optionalChannel.isPresent()) {
+      channelTrans.setChannel(optionalChannel.get());
+      return channelService.save(channelTrans);
     }
-    return response;
-
+    return null;
   }
 
   @Override
-  public ResponseEntity<Channels> getAllChannels() {
-    return channelService.getAllChannels();
+  public List<ChannelTrans> getTransaction(String source, String tranType) {
+    return channelTransRepository.findBySourceAppAndTranType(source, tranType);
   }
-
 }

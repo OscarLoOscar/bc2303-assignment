@@ -15,3 +15,7 @@ Relying upon circular references is discouraged and they are prohibited by defau
 
 
 ####solution : 
+
+pring Boot的Service层是应用程序中的业务逻辑层。它们与数据存储层（如Repository）和表示层（如Controller）相对独立，因此可以更轻松地更改和测试代码。
+
+通常，Service层处理与业务相关的操作，例如数据验证，数据处理和数据转换。它们还通常调用Repository层以获取数据并将处理后的数据返回给Controller层。

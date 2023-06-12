@@ -1,49 +1,82 @@
 package com.codewave.project.projectcryptochannel.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.codewave.project.projectcryptochannel.model.ChannelTrans;
 import com.codewave.project.projectcryptochannel.model.Channels;
-import com.codewave.project.projectcryptochannel.repository.channelRepository;
+import com.codewave.project.projectcryptochannel.repository.ChannelRepository;
+import com.codewave.project.projectcryptochannel.repository.ChannelTransRepository;
 import com.codewave.project.projectcryptochannel.service.ChannelService;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
-@Slf4j
 public class ChannelServiceImpl implements ChannelService {
-  @Autowired
-  channelRepository channelRepository;
 
   @Autowired
-  ModelMapper modelMapper;
+  ChannelRepository channelRepository;
+
+  @Autowired
+  ChannelTransRepository channelTransRepository;
 
   @Override
-  public Channels addChannelById(Channels newChannels, Long id) {
-    log.info("Service 1 : " + newChannels.toString());
-    log.info("Service 2 : " + id.toString());
-    if (id == null || newChannels == null) {
+  public List<Channels> getAll() {
+    return channelRepository.findAll();
+  }
+
+  @Override
+  public Channels addByChannelId(Channels channel, Long id) {
+    if (id == null || channel == null) {
       return null;
     }
     return channelRepository.findById(id)
-        .map(channles -> {
-          channles.setChannelCode(newChannels.getChannelCode());
-          channles.setChannelUrl(newChannels.getChannelUrl());
-          return channelRepository.save(channles);
+        .map(e -> {
+          e.setChannelCode(channel.getChannelCode());
+          e.setChannelUrl(channel.getChannelUrl());
+          e.setLastUpdDate(channel.getLastUpdDate());
+          return channelRepository.save(e);
         }).orElseGet(() -> {
           return null;
         });
   }
 
   @Override
-  public ResponseEntity<Channels> getAllChannels() {
-    List<Channels> response = channelRepository.findAll();
-    Channels result = modelMapper.map(response, Channels.class);
-    return ResponseEntity.ok().body(result);
+  public Channels save(Channels channels) {
+    return channelRepository.save(channels);
+  }
 
+  @Override
+  public ChannelTrans save(ChannelTrans channelTrans) {
+    ChannelTrans transaction = new ChannelTrans();
+    transaction.setChannel(channelTrans.getChannel());
+    transaction.setDomainUrl(channelTrans.getDomainUrl());
+    transaction.setDomainVersion(channelTrans.getDomainVersion());
+    transaction.setLastUpdDate(channelTrans.getLastUpdDate());
+    transaction.setSourceApp(channelTrans.getSourceApp());
+    transaction.setTranType(channelTrans.getTranType());
+
+    return channelTransRepository.save(channelTrans);
+  }
+
+  @Override
+  public List<Channels> findAll() {
+    return channelRepository.findAll();
+  }
+
+  @Override
+  public Optional<Channels> get(Long id) {
+    return channelRepository.findById(id);
+  }
+
+  @Override
+  public List<ChannelTrans> getTransaction(String source, String tranType) {
+    return channelTransRepository.findBySourceAppAndTranType(source, tranType);
+  }
+
+  @Override
+  public List<ChannelTrans> findAllTransaction() {
+    return channelTransRepository.findAll();
   }
 }
