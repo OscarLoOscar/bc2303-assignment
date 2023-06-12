@@ -20,9 +20,9 @@ import com.codewave.project.projectcryptochannel.model.Channels;
  * and t.tran_type = 'ex-rate'
  */
 public interface ChannelRepository extends JpaRepository<Channels, Long> {
-  Channels findByCoinTransSourceAppAndCoinTransTranType(
-      String sourceApp,
-      String tranType);
+  // Channels findBySourceAppAndTranType(
+  //     String sourceApp,
+  //     String tranType);
 
   List<Channels> findAll();
 
