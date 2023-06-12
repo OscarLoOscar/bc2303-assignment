@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.micrometer.common.lang.NonNull;
@@ -40,6 +41,7 @@ public class Channels implements Serializable {
 
   @NonNull
   @Column(name = "LAST_UPD_DATE")
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") // 重要
   private LocalDateTime lastUpdDate;
 
   @OneToMany(mappedBy = "channel")
