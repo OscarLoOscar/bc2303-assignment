@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.codewave.project.projectcryptochannel.model.ChannelCoinMapping;
 import com.codewave.project.projectcryptochannel.model.ChannelTrans;
 import com.codewave.project.projectcryptochannel.model.Channels;
 
@@ -42,5 +43,12 @@ public interface ChannelOperation {
         @GetMapping(value = "/channel/transactions")
         List<ChannelTrans> getTransaction(@RequestParam(value = "source") String source,
                         @RequestParam(value = "tranType") String tranType);
+
+        @PostMapping(value = "/channel/{channelId}/coin")
+        ChannelCoinMapping createCoin(@PathVariable Long channelId,
+                        @RequestBody ChannelCoinMapping channelCoinMapping);
+
+        @GetMapping(value = "/channel/coins")
+        List<ChannelCoinMapping> getCoin(@RequestParam(value = "tranType") String tranType);
 
 }

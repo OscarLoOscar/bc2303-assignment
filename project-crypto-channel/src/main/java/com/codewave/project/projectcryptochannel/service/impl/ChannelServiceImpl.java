@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codewave.project.projectcryptochannel.model.ChannelCoinMapping;
 import com.codewave.project.projectcryptochannel.model.ChannelTrans;
 import com.codewave.project.projectcryptochannel.model.Channels;
+import com.codewave.project.projectcryptochannel.repository.ChannelCoinMapRepository;
 import com.codewave.project.projectcryptochannel.repository.ChannelRepository;
 import com.codewave.project.projectcryptochannel.repository.ChannelTransRepository;
 import com.codewave.project.projectcryptochannel.service.ChannelService;
@@ -20,6 +22,9 @@ public class ChannelServiceImpl implements ChannelService {
 
   @Autowired
   ChannelTransRepository channelTransRepository;
+
+  @Autowired
+  ChannelCoinMapRepository channelCoinMapRepository;
 
   @Override
   public List<Channels> getAll() {
@@ -78,5 +83,14 @@ public class ChannelServiceImpl implements ChannelService {
   @Override
   public List<ChannelTrans> findAllTransaction() {
     return channelTransRepository.findAll();
+  }
+
+  @Override
+  public ChannelCoinMapping save(ChannelCoinMapping channelCoinMapping) {
+    ChannelCoinMapping coinMapping = new ChannelCoinMapping();
+    coinMapping.setChannel(channelCoinMapping.getChannel());
+    coinMapping.setCoinCode(channelCoinMapping.getCoinCode());
+    coinMapping.setLastUpdDate(channelCoinMapping.getLastUpdDate());
+    return channelCoinMapRepository.save(channelCoinMapping);
   }
 }

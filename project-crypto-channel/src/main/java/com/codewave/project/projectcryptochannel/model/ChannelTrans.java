@@ -1,7 +1,9 @@
 package com.codewave.project.projectcryptochannel.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.annotation.Nonnull;
@@ -25,10 +27,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Table(name = "CHANNEL_TRANS")
-public class ChannelTrans {
+public class ChannelTrans implements Serializable {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   @Nonnull
   @Column(name = "DOMAIN_VERSION")
   private String domainVersion;
@@ -47,11 +51,12 @@ public class ChannelTrans {
 
   @Nonnull
   @Column(name = "LAST_UPD_DATE")
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") // 重要
   private LocalDateTime lastUpdDate;
 
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "channel_id", referencedColumnName = "id")
-  @JsonIgnoreProperties("coinTrans")
+  @JsonIgnoreProperties(ignoreUnknown = true)
   private Channels channel;
 
 }

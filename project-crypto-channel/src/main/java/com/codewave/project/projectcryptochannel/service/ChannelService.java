@@ -3,6 +3,7 @@ package com.codewave.project.projectcryptochannel.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.codewave.project.projectcryptochannel.model.ChannelCoinMapping;
 import com.codewave.project.projectcryptochannel.model.ChannelTrans;
 import com.codewave.project.projectcryptochannel.model.Channels;
 
@@ -23,4 +24,7 @@ public interface ChannelService {
   List<ChannelTrans> findAllTransaction();
 
   List<ChannelTrans> getTransaction(String source, String tranType);
+
+  ChannelCoinMapping save(ChannelCoinMapping channelCoinMapping);
+
 }

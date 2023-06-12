@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codewave.project.projectcryptochannel.controller.ChannelOperation;
+import com.codewave.project.projectcryptochannel.model.ChannelCoinMapping;
 import com.codewave.project.projectcryptochannel.model.ChannelTrans;
 import com.codewave.project.projectcryptochannel.model.Channels;
+import com.codewave.project.projectcryptochannel.repository.ChannelCoinMapRepository;
 import com.codewave.project.projectcryptochannel.repository.ChannelRepository;
 import com.codewave.project.projectcryptochannel.repository.ChannelTransRepository;
 import com.codewave.project.projectcryptochannel.service.ChannelService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping(value = "/crypto/admin/api/v1")
 public class ChannelController implements ChannelOperation {
@@ -27,6 +32,9 @@ public class ChannelController implements ChannelOperation {
 
   @Autowired
   ChannelTransRepository channelTransRepository;
+
+  @Autowired
+  ChannelCoinMapRepository channelCoinMapRepository;
 
   @Autowired
   ModelMapper modelMapper;
@@ -63,6 +71,24 @@ public class ChannelController implements ChannelOperation {
 
   @Override
   public List<ChannelTrans> getTransaction(String source, String tranType) {
+    log.info("tranType" + tranType);
+    log.info("source" + source);
     return channelTransRepository.findBySourceAppAndTranType(source, tranType);
   }
+
+  @Override
+  public ChannelCoinMapping createCoin(Long channelId, ChannelCoinMapping channelCoinMapping) {
+    Optional<Channels> optionalChannel = channelService.get(channelId);
+    if (optionalChannel.isPresent()) {
+      channelCoinMapping.setChannel(optionalChannel.get());
+    }
+    return channelService.save(channelCoinMapping);
+
+  }
+
+  @Override
+  public List<ChannelCoinMapping> getCoin(String tranType) {
+    return channelCoinMapRepository.findAll();
+  }
+
 }
