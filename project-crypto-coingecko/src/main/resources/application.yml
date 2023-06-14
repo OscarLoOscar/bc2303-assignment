@@ -5,28 +5,21 @@ api:
   coingecko:
     domain: 'api.coingecko.com'
     market:
+      # ?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false
       endpoint: '/coins/markets'
       pathSegment: 'api'
       version: 'v3'
       params:
-        vs_currency: 'usd'
-        order: 'market_cap_desc'
-        per_page: '100'
+        vs-currency: 'usd'
+        order-by: 'market_cap_desc'
+        per-page: '100'
         page: '1'
         sparkline: 'false'
-        locale: 'en'
-      # https://api.coingecko.com/api/v3/
-      # simple/
-      # price?ids=Bitcoin%2CEthereum%2CTether%2CDogecoin&
-      #vs_currencies=usd%2Chkd
-      
-      #https://api.coingecko.com/api/v3/simple/price?ids=Bitcoin
-      #%2CEthereum%2CTether%2CDogecoin&vs_currencies=usd%2Chkd
-    simple:
-      endpoint2: '/simple'
+    simple-price:
+      # ?ids=bitcoin,ethereum,tether,dogecoin,ripple&vs_currencies=usd,hkd
+      endpoint: '/simple/price'
       pathSegment: 'api'
       version: 'v3'
-      params2: 
-        ids: 'Bitcoin,Ethereum,Tether,Dogecoin,binancecoin'
-        vs_currencies: 'usd,hkd'
-      # ?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false
+      # params:
+        # ids: 'bitcoin,ethereum,tether,dogecoin,ripple'
+        # vs-currencies: 'usd,hkd'

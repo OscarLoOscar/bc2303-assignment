@@ -1,0 +1,12 @@
+server:
+  port: 8086
+
+api:
+  polygon:
+    domain: 'api.polygon.io'
+    prev:
+      endpoint: '/aggs/ticker/X:{COINS}/prev'
+      version: 'v2'
+      params:
+        adjusted: true
+        api-key: 'chOagSkBjTlw5bJFpbWPdODnEETGVDQ7'
