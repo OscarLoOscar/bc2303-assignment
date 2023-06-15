@@ -1,11 +1,15 @@
 package com.codewave.project.crypto.channel.service.impl.exchange;
 
+import java.math.RoundingMode;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.codewave.project.crypto.channel.dto.response.ChannelDto;
+import com.codewave.project.crypto.channel.dto.response.ChannelDto.ExchangeRate;
 import com.codewave.project.crypto.channel.infra.enums.Currency;
 import com.codewave.project.crypto.channel.service.AdminService;
 import com.codewave.project.crypto.channel.service.ExchangeService;
@@ -28,5 +32,4 @@ public class PolygonExchangeService implements ExchangeService {
     // Get Exchange rates
     return restTemplate.getForObject(url, ChannelDto.class);
   }
-
 }
